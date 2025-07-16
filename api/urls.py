@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SessionListCreateView, MediaUploadView, NoteCreateView, RegisterView
+from .views import SessionListCreateView, MediaUploadView, NoteCreateView, RegisterView, ServicesView
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     path('media/', MediaUploadView.as_view(), name='media-upload'),
     path('notes/', NoteCreateView.as_view(), name='note-create'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('services/', ServicesView.as_view(), name='services'),
 ] 

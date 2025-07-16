@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class SessionListCreateView(generics.ListCreateAPIView):
     serializer_class = SessionSerializer
@@ -47,4 +48,10 @@ class RegisterView(APIView):
         if User.objects.filter(username=username).exists():
             return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
         user = User.objects.create_user(username=username, password=password)
-        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED) 
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+
+class ServicesView(APIView):
+    permission_classes = [IsAuthenticated]  # or [] if you want it public
+
+    def get(self, request):
+        return Response({"message": "Services endpoint is working!"}) 
